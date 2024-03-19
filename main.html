@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transactions</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <style>
+        body{
+            background-image: url("https://png.pngtree.com/background/20230622/original/pngtree-illustration-of-3d-personal-bank-account-and-credit-card-with-money-picture-image_3950197.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .form-control{
+            border-radius: 20px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+    </style>
+    <nav class="navbar navbar-expand-lg bg-info text-white">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">  My Bank</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">About Us</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                 Services
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+              </li>
+            </ul>
+            <div class="d-flex">
+              <input class="form-control me-5"  placeholder="Search" >
+              <button class="btn btn-danger"  onclick="logoutt()">LogOut</button>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <div class="container mt-4">
+        <div style="background-color: rgba(0, 0, 0, 0.721); padding: 20px; height: 500px;">
+            <h2 class="text-center text-white ">Welcome User</h2>
+            <p class="text-center text-white">Online Banking Services</p>
+
+            <div class="row mt-4">
+                <div class="col-6">
+                    <h3 class="text-center text-info fw-light">Deposite</h3>
+                    <div style=" width: 400px;background-color: aliceblue; padding: 30px; box-shadow: 5px 10px 19px 15px rgba(0, 0, 0, 0.616);" class="rounded ms-5 mt-3">
+                       
+                        <input type="text" name="" id="depamount" class="form-control" placeholder="Enter Your Amount">
+                      
+                        
+                        <input type="password" name="" id="depaccnno" class="form-control mt-3" placeholder="Enter Your Account No:">
+                        
+                        <br>
+                        <div class="text-center">
+                        <button class="btn btn-success " onclick="deposite()">Deposite</button><br><br>
+                        <div id="balance-amount" style="position: absolute; margin-left: 5%;"></div>
+                    </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <h3 class="text-center text-info fw-light">Withdraw</h3>
+                    <div style=" width: 400px;background-color: aliceblue; padding: 30px; box-shadow: 5px 10px 19px 15px rgba(0, 0, 0, 0.616);" class="rounded ms-5 mt-3">
+                       
+                        <input type="text" name="" id="widamount" class="form-control" placeholder="Enter Your Amount">
+                      
+                        
+                        <input type="password" name="" id="widaccno" class="form-control mt-3" placeholder="Enter Your Account No:">
+                        
+                        <br>
+                        <div class="text-center">
+                        <button class="btn btn-danger " onclick="withdraw()">Withdraw</button><br><br>
+                        <div id="balance-in-with"style="position: absolute; margin-left: 5%;" ></div>
+                    </div>
+                    </div>
+                </div>
+            </div><br><br>
+            <div class="text-center" >
+              <button class="btn btn-secondary" onclick="checkbalance()" style="position: absolute; margin-left:-7%;">Check Balance</button>
+            </div>
+        </div>
+      </div>
+
+      <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+      <script>
+
+let depositee=0;
+let withdraww=0;
+let totalBalance=0;
+
+function deposite(){
+    depositee=depamount.value;
+    accnum=depaccnno.value;
+    depositee=Math.floor(depositee);
+  
+    if(accnum in localStorage){
+        account=JSON.parse(localStorage.getItem(accnum));
+        if(accnum==account.acno && depositee <=0){
+            alert("Value cannot be empty or negative ")
+        }else{
+            account.balance +=depositee;
+             localStorage.setItem(accnum,JSON.stringify(account));
+
+             swal("", "Your amount is successfully Added", "success");
+             document.getElementById("balance-amount").innerHTML=`<div style="color:red;">Your current Balance is : ${account.balance} </div>`
+             depamount.value="";
+             depaccnno.value=""
+             document.getElementById("balance-amount").style.display=""
+
+            
+        }
+    }else{
+      swal("Error!", "Please Enter all Fields!", "warning");
+        document.getElementById("balance-amount").style.display="none"
+       
+    }
+
+}
+
+function withdraw(){
+    amount=widamount.value;
+    accnum=widaccno.value;
+    withdraww=Math.floor(withdraww);
+
+    if(accnum in localStorage){
+      account=JSON.parse(localStorage.getItem(accnum));
+      if(accnum==account.acno && amount <=0){
+        alert("Please enter the amount")
+      }else if(amount > account.balance){
+        alert("Insufficient Balance!!!!!!")
+      }else{
+        alert("Bank Balace Before Withdrawal = " +account.balance)
+
+        alert("Withdrawal amount = " +amount)
+        account.balance-=amount;
+        swal("", "Your amount is successfully withdrawn", "success");
+        localStorage.setItem(accnum,JSON.stringify(account))
+
+        alert("After withdrawal balance = " + account.balance);
+        document.getElementById("balance-in-with").innerHTML=`<div style="color:red">Your Current Balance is : ${account.balance} </div>`
+
+
+        widamount.value="";
+        widaccno.value="";
+        document.getElementById("balance-in-with").style.display=""
+
+      }
+    }else if(widamount.value=="" || widaccno===""){
+      swal("Error!", "Please Enter all Fields!", "warning");
+      document.getElementById("balance-in-with").style.display="none"
+    }else{
+      swal ( "Oops" ,  "Incorrect Password !!" ,  "error" )
+      document.getElementById("balance-in-with").style.display="none"
+    }
+
+ 
+
+}
+
+
+
+function checkbalance() {
+  // Prompt the user to enter their account number
+  var acno = prompt("Enter Your Account No:");
+
+  // Check if the account number exists in local storage
+  if (acno in localStorage) {
+    // Retrieve the account details from local storage
+    var account = JSON.parse(localStorage.getItem(acno));
+
+    // Display the balance if the account exists
+    swal(`${account.balance} ₹`, ` is Your Balance`, "success");
+  } else {
+    // Display an error message if the account is not found
+    alert("Account not found");
+  }
+}
+
+
+
+        function logoutt(){
+            window.location="./index.html"
+        }
+      </script>
+</body>
+</html>
